@@ -4,18 +4,35 @@ public class Calculator {
             System.out.println("Error");
             return;
         }
-        double n1 = Double.parseDouble(args[0]);
-        double n2 = Double.parseDouble(args[1]);
-        String op = args[2];
-        double res = 0;
-        if (op.equals("add")) {
-            res = n1 + n2;
-        } else if (op.equals("subtract")) {
-            res = n1 - n2;
-        } else {
-            System.out.println("Error");
-            return;
+
+        double num1 = Double.parseDouble(args[0]);
+        double num2 = Double.parseDouble(args[1]);
+        String operation = args[2];
+
+        double result = 0;
+
+        switch (operation) {
+            case "add":
+                result = num1 + num2;
+                break;
+            case "subtract":
+                result = num1 - num2;
+                break;
+            case "multiply":
+                result = num1 * num2;
+                break;
+            case "divide":
+                if (num2 == 0) {
+                    System.out.println("Error");
+                    return;
+                }
+                result = num1 / num2;
+                break;
+            default:
+                System.out.println("Error");
+                return;
         }
-        System.out.println(res);
+
+        System.out.println(result);
     }
 }

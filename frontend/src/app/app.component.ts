@@ -14,13 +14,19 @@ import { CommonModule } from '@angular/common';
 export class AppComponent {
   number1 = 0;
   number2 = 0;
-  operation = 'add';
+  operation = '';
   result: number | null = null;
   history: any[] = [];
 
   constructor(private calculatorService: CalculatorService) {}
 
   calculate() {
+
+      if (!this.operation) {
+    alert("Please select an operation.");
+    return;
+  }
+  
     this.calculatorService.calculate({
       number1: this.number1,
       number2: this.number2,

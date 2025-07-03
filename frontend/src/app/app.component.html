@@ -1,0 +1,19 @@
+ <h2>Calculator</h2>
+    <input [(ngModel)]="number1" placeholder="Number 1" type="number">
+    <input [(ngModel)]="number2" placeholder="Number 2" type="number">
+    <select [(ngModel)]="operation">
+      <option value="add">Add</option>
+      <option value="subtract">Subtract</option>
+    </select>
+    <button (click)="calculate()">Calculate</button>
+
+    <div *ngIf="result !== null">
+      <h3>Result: {{ result }}</h3>
+    </div>
+
+    <h3>Recent Calculations</h3>
+    <ul>
+      <li *ngFor="let item of history">
+        {{item.number1}} {{item.operation}} {{item.number2}} = {{item.result}}
+      </li>
+    </ul>

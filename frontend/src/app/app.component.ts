@@ -1,49 +1,13 @@
 import { Component } from '@angular/core';
-import { CalculatorService } from './calculator.service';
-import { FormsModule, NgModel } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CalculatorComponent } from './components/calculator/calculator.component';
+
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule,CommonModule],
+  imports: [CalculatorComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-
-
 export class AppComponent {
-  number1 = 0;
-  number2 = 0;
-  operation = '';
-  result: number | null = null;
-  history: any[] = [];
-
-  constructor(private calculatorService: CalculatorService) {}
-
-  calculate() {
-
-      if (!this.operation) {
-    alert("Please select an operation.");
-    return;
-  }
-  
-    this.calculatorService.calculate({
-      number1: this.number1,
-      number2: this.number2,
-      operation: this.operation
-    }).subscribe(res => {
-      this.result = res.result;
-      this.loadHistory();
-    });
-  }
-
-  loadHistory() {
-    this.calculatorService.getHistory().subscribe(data => {
-      this.history = data;
-    });
-  }
-
-  ngOnInit() {
-    this.loadHistory();
-  }
+  title = 'frontend';
 }

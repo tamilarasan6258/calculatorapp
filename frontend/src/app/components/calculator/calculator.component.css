@@ -1,0 +1,36 @@
+/* Container centers content on the page */
+.container {
+  max-width: 30%;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+/* Make inputs, selects, button full-width */
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+/* Add spacing after result */
+.result {
+  margin-top: 16px;
+}
+
+/* Spacing between cards */
+mat-card {
+  margin-bottom: 24px;
+  padding: 16px;
+}
+
+/* Optional: Make list items slightly larger and consistent */
+mat-list-item {
+  font-size: 16px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .container {
+    margin: 20px auto;
+    padding: 0 8px;
+  }
+}

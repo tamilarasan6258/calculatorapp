@@ -1,0 +1,43 @@
+<div class="container">
+
+<mat-card>
+  <h2>Calculator</h2>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Number 1</mat-label>
+    <input matInput type="number" [(ngModel)]="number1">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Number 2</mat-label>
+    <input matInput type="number" [(ngModel)]="number2">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Operation</mat-label>
+    <mat-select [(ngModel)]="operation">
+      <mat-option value="">Select Operation</mat-option>
+      <mat-option value="add">Add</mat-option>
+      <mat-option value="subtract">Subtract</mat-option>
+      <mat-option value="multiply">Multiply</mat-option>
+      <mat-option value="divide">Divide</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" class="full-width" (click)="calculate()">Calculate</button>
+
+  <div *ngIf="result !== null" class="result">
+    <h3>Result: {{ result }}</h3>
+  </div>
+</mat-card>
+
+<mat-card>
+  <h3>Recent Calculations</h3>
+  <mat-list>
+    <mat-list-item *ngFor="let item of history">
+      {{item.number1}} {{item.operation}} {{item.number2}} = {{item.result}}
+    </mat-list-item>
+  </mat-list>
+</mat-card>
+
+</div>

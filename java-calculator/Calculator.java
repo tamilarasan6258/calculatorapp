@@ -5,6 +5,7 @@ public class Calculator {
             return;
         }
 
+        // System.out.println(args[0]);
         double num1 = Double.parseDouble(args[0]);
         double num2 = Double.parseDouble(args[1]);
         String operation = args[2];

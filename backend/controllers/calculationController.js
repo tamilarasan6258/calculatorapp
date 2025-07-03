@@ -1,38 +1,26 @@
-const { spawn } = require("child_process");
 const Calculation = require("../models/Calculation");
+const javaCalculatorService = require("../services/javaCalculatorService");
 
 // POST /api/calculate
-exports.calculate = (req, res) => {
+exports.calculate = async (req, res) => {
     const { number1, number2, operation } = req.body;
 
-    const java = spawn("java", ["-cp", "../java-calculator", "Calculator", number1, number2, operation]);
+    try {
+        const result = await javaCalculatorService.calculate(number1, number2, operation);
 
-    let output = "";
-    java.stdout.on("data", (data) => {
-        output += data.toString();
-    });
+        const record = new Calculation({
+            number1,
+            number2,
+            operation,
+            result
+        });
+        await record.save();
 
-    java.on("close", async (code) => {
-        if (code !== 0 || output.trim() === "Error") {
-            return res.status(500).json({ error: "Calculation error" });
-        }
-
-        const result = parseFloat(output.trim());
-
-        try {
-            const record = new Calculation({
-                number1,
-                number2,
-                operation,
-                result
-            });
-            await record.save();
-            res.json({ result });
-        } catch (err) {
-            console.error("❌ Error saving calculation:", err);
-            res.status(500).json({ error: "Database error" });
-        }
-    });
+        res.json({ result });
+    } catch (err) {
+        console.error("❌ Calculation error:", err);
+        res.status(500).json({ error: err.message || "Calculation error" });
+    }
 };
 
 // GET /api/history

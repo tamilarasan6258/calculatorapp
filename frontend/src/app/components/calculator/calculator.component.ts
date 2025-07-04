@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CalculatorService } from '../../services/calculator.service';
+import { Calculation } from '../../models/calculation.model';
 
 // Material modules
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,6 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
+
 
 @Component({
   selector: 'app-calculator',
@@ -27,58 +29,13 @@ import { MatListModule } from '@angular/material/list';
   templateUrl: './calculator.component.html',
   styleUrl: './calculator.component.css'
 })
-// export class CalculatorComponent {
-//   number1 = 0;
-//   number2 = 0;
-//   operation = '';
-//   result: number | null = null;
-//   history: any[] = [];
 
-//   constructor(private calculatorService: CalculatorService) {}
-
-// expression = '';
-
-// calculate() {
-//   if (!this.expression) {
-//     alert("Please enter an expression.");
-//     return;
-//   }
-
-//   this.calculatorService.calculate({
-//     expression: this.expression
-//   }).subscribe(res => {
-//     this.result = res.result;
-//     this.loadHistory();
-//   });
-// }
-
-// buttons = ['7','8','9','/','4','5','6','*','1','2','3','-','0','.','+','(',')'];
-
-// append(value: string) {
-//   this.expression += value;
-// }
-
-// clear() {
-//   this.expression = '';
-// }
-
-
-
-//   loadHistory() {
-//     this.calculatorService.getHistory().subscribe(data => {
-//       this.history = data;
-//     });
-//   }
-
-//   ngOnInit() {
-//     this.loadHistory();
-//   }
-// }
 
 export class CalculatorComponent {
   expression = '';
   result: number | null = null;
-  history: any[] = [];
+  // history: any[] = [];
+  history: Calculation[] = [];
 
   buttons = ['7','8','9','/','4','5','6','*','1','2','3','-','0','.','+','(',')'];
 

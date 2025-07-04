@@ -1,30 +1,49 @@
 <div class="container">
 
+<h2>Calculator</h2>
+
 <mat-card>
-  <h2>Calculator</h2>
+
 
   <mat-form-field appearance="fill" class="full-width">
-    <mat-label>Number 1</mat-label>
-    <input matInput type="number" [(ngModel)]="number1">
+    <!-- <input matInput [(ngModel)]="expression" placeholder="Expression" readonly> -->
+     <input matInput [(ngModel)]="expression" placeholder="Expression">
+
   </mat-form-field>
 
-  <mat-form-field appearance="fill" class="full-width">
-    <mat-label>Number 2</mat-label>
-    <input matInput type="number" [(ngModel)]="number2">
-  </mat-form-field>
+  <!-- <div class="button-grid">
+    <button mat-button *ngFor="let btn of buttons" (click)="append(btn)">{{ btn }}</button>
+  </div> -->
 
-  <mat-form-field appearance="fill" class="full-width">
-    <mat-label>Operation</mat-label>
-    <mat-select [(ngModel)]="operation">
-      <mat-option value="">Select Operation</mat-option>
-      <mat-option value="add">Add</mat-option>
-      <mat-option value="subtract">Subtract</mat-option>
-      <mat-option value="multiply">Multiply</mat-option>
-      <mat-option value="divide">Divide</mat-option>
-    </mat-select>
-  </mat-form-field>
+  <div class="button-grid">
+  <button mat-button class="btn-clear" (click)="clear()">C</button>
+  <button mat-button (click)="append('(')">(</button>
+  <button mat-button (click)="append(')')">)</button>
+  <button mat-button (click)="append('/')">÷</button>
 
-  <button mat-raised-button color="primary" class="full-width" (click)="calculate()">Calculate</button>
+  <button mat-button (click)="append('7')">7</button>
+  <button mat-button (click)="append('8')">8</button>
+  <button mat-button (click)="append('9')">9</button>
+  <button mat-button (click)="append('*')">×</button>
+
+  <button mat-button (click)="append('4')">4</button>
+  <button mat-button (click)="append('5')">5</button>
+  <button mat-button (click)="append('6')">6</button>
+  <button mat-button (click)="append('-')">−</button>
+
+  <button mat-button (click)="append('1')">1</button>
+  <button mat-button (click)="append('2')">2</button>
+  <button mat-button (click)="append('3')">3</button>
+  <button mat-button (click)="append('+')">+</button>
+
+  <button mat-button class="zero-btn" (click)="append('0')">0</button>
+  <button mat-button (click)="append('.')">.</button>
+  <button mat-button color="primary" (click)="calculate()">=</button>
+</div>
+
+
+  <!-- <button mat-raised-button color="primary" (click)="calculate()">=</button>
+  <button mat-raised-button color="warn" (click)="clear()">C</button> -->
 
   <div *ngIf="result !== null" class="result">
     <h3>Result: {{ result }}</h3>
@@ -35,7 +54,7 @@
   <h3>Recent Calculations</h3>
   <mat-list>
     <mat-list-item *ngFor="let item of history">
-      {{item.number1}} {{item.operation}} {{item.number2}} = {{item.result}}
+      {{item.expression}} = {{item.result}}
     </mat-list-item>
   </mat-list>
 </mat-card>

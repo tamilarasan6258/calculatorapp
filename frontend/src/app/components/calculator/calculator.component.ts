@@ -27,38 +27,114 @@ import { MatListModule } from '@angular/material/list';
   templateUrl: './calculator.component.html',
   styleUrl: './calculator.component.css'
 })
+// export class CalculatorComponent {
+//   number1 = 0;
+//   number2 = 0;
+//   operation = '';
+//   result: number | null = null;
+//   history: any[] = [];
+
+//   constructor(private calculatorService: CalculatorService) {}
+
+// expression = '';
+
+// calculate() {
+//   if (!this.expression) {
+//     alert("Please enter an expression.");
+//     return;
+//   }
+
+//   this.calculatorService.calculate({
+//     expression: this.expression
+//   }).subscribe(res => {
+//     this.result = res.result;
+//     this.loadHistory();
+//   });
+// }
+
+// buttons = ['7','8','9','/','4','5','6','*','1','2','3','-','0','.','+','(',')'];
+
+// append(value: string) {
+//   this.expression += value;
+// }
+
+// clear() {
+//   this.expression = '';
+// }
+
+
+
+//   loadHistory() {
+//     this.calculatorService.getHistory().subscribe(data => {
+//       this.history = data;
+//     });
+//   }
+
+//   ngOnInit() {
+//     this.loadHistory();
+//   }
+// }
+
 export class CalculatorComponent {
-  number1 = 0;
-  number2 = 0;
-  operation = '';
+  expression = '';
   result: number | null = null;
   history: any[] = [];
 
+  buttons = ['7','8','9','/','4','5','6','*','1','2','3','-','0','.','+','(',')'];
+
   constructor(private calculatorService: CalculatorService) {}
-
-  calculate() {
-    if (!this.operation) {
-      alert("Please select an operation.");
-      return;
-    }
-
-    this.calculatorService.calculate({
-      number1: this.number1,
-      number2: this.number2,
-      operation: this.operation
-    }).subscribe(res => {
-      this.result = res.result;
-      this.loadHistory();
-    });
-  }
-
-  loadHistory() {
-    this.calculatorService.getHistory().subscribe(data => {
-      this.history = data;
-    });
-  }
 
   ngOnInit() {
     this.loadHistory();
+    // Listen for keyboard events
+    window.addEventListener('keydown', this.handleKeyPress.bind(this));
+  }
+
+  ngOnDestroy() {
+    // Clean up event listener
+    window.removeEventListener('keydown', this.handleKeyPress.bind(this));
+  }
+
+  append(value: string) {
+    this.expression += value;
+  }
+
+  clear() {
+    this.expression = '';
+  }
+
+  calculate() {
+    if (!this.expression) {
+      alert("Please enter an expression.");
+      return;
+    }
+
+    this.calculatorService.calculate({ expression: this.expression })
+      .subscribe(res => {
+        this.result = res.result;
+        this.loadHistory();
+      });
+  }
+
+  loadHistory() {
+    this.calculatorService.getHistory()
+      .subscribe(data => {
+        this.history = data;
+      });
+  }
+
+  handleKeyPress(event: KeyboardEvent) {
+    const allowedKeys = ['0','1','2','3','4','5','6','7','8','9','+','-','*','/','.','(',')'];
+
+    if (allowedKeys.includes(event.key)) {
+      this.append(event.key);
+    } else if (event.key === 'Enter') {
+      this.calculate();
+    } else if (event.key === 'Backspace') {
+      this.expression = this.expression.slice(0, -1);
+    } else if (event.key === 'Escape') {
+      this.clear();
+    }
   }
 }
+

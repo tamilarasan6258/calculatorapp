@@ -1,36 +1,194 @@
-/* Container centers content on the page */
 .container {
-  max-width: 30%;
-  margin: 40px auto;
-  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  font-family: 'Roboto', sans-serif; /* A clean, modern font */
+  background-color: #f0f2f5; /* Light grey background */
+  min-height: 100vh; /* Full viewport height */
+  justify-content: center;
 }
 
-/* Make inputs, selects, button full-width */
+mat-card {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  border-radius: 12px; /* Rounded corners for cards */
+  background-color: #ffffff; /* White card background */
+}
+
+mat-card h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 25px;
+  font-size: 1.8em;
+  font-weight: 500;
+}
+
 .full-width {
   width: 100%;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
-/* Add spacing after result */
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: #e8f0fe; /* Lighter background for input */
+  border-radius: 8px;
+}
+
+.mat-form-field-infix {
+  padding: 12px 0;
+}
+
+.mat-input-element {
+  font-size: 1.8em; /* Larger font for expression */
+  text-align: right; /* Align text to the right */
+  color: #333;
+  padding-right: 10px;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  gap: 10px; /* Space between buttons */
+  margin-top: 20px;
+}
+
+.button-grid button {
+  width: 100%;
+  padding: 20px 0; /* Increase padding for larger buttons */
+  font-size: 1.5em; /* Larger font for button text */
+  border-radius: 8px; /* Rounded corners for buttons */
+  transition: all 0.2s ease-in-out; /* Smooth transitions for hover/active */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle button shadow */
+  background-color: #f7f7f7; /* Light button background */
+  color: #555;
+  border: none; /* Remove default button border */
+}
+
+.button-grid button:hover {
+  background-color: #e0e0e0; /* Slightly darker on hover */
+  transform: translateY(-2px); /* Lift button slightly */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* More prominent shadow on hover */
+}
+
+.button-grid button:active {
+  background-color: #cccccc; /* Even darker on click */
+  transform: translateY(0); /* Press down effect */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Reduced shadow on click */
+}
+
+/* Specific button styling */
+.btn-clear {
+  grid-column: span 1; /* Occupy 1 column */
+  background-color: #ff6b6b; /* Red for clear button */
+  color: white;
+}
+
+.btn-clear:hover {
+  background-color: #ff4c4c;
+}
+
+.btn-clear:active {
+  background-color: #ff3333;
+}
+
+.zero-btn {
+  grid-column: span 2; /* Make the 0 button span two columns */
+}
+
+button[color="primary"] {
+  background-color: #4CAF50; /* Green for primary action (equals) */
+  color: white;
+}
+
+button[color="primary"]:hover {
+  background-color: #45a049;
+}
+
+button[color="primary"]:active {
+  background-color: #3b8e40;
+}
+
+/* Operator styling */
+.button-grid button:nth-child(4n), /* Every 4th button (operators) */
+.button-grid button:nth-child(16), /* + button */
+.button-grid button:nth-child(17) /* = button */ {
+  background-color: #6a82fb; /* Blue for operators */
+  color: white;
+}
+
+.button-grid button:nth-child(4n):hover,
+.button-grid button:nth-child(16):hover,
+.button-grid button:nth-child(17):hover {
+  background-color: #586ce0;
+}
+
+.button-grid button:nth-child(4n):active,
+.button-grid button:nth-child(16):active,
+.button-grid button:nth-child(17):active {
+  background-color: #495bbd;
+}
+
+
 .result {
-  margin-top: 16px;
+  text-align: right;
+  margin-top: 20px;
+  font-size: 2em; /* Larger font for result */
+  font-weight: bold;
+  color: #28a745; /* Green for positive result */
+  background-color: #e6ffe6; /* Light green background for result */
+  padding: 10px 15px;
+  border-radius: 8px;
 }
 
-/* Spacing between cards */
-mat-card {
-  margin-bottom: 24px;
-  padding: 16px;
+.result h3 {
+  margin: 0;
+  color: #333;
+  font-size: 0.7em; /* Smaller "Result:" label */
+  font-weight: normal;
 }
 
-/* Optional: Make list items slightly larger and consistent */
+mat-list {
+  background-color: #fcfcfc;
+  border-radius: 8px;
+  padding: 10px 0;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Inner shadow for list */
+}
+
 mat-list-item {
-  font-size: 16px;
+  font-size: 1.1em;
+  padding: 8px 15px;
+  border-bottom: 1px solid #eee; /* Separator for list items */
+  color: #666;
+  transition: background-color 0.2s ease;
+}
+
+mat-list-item:last-child {
+  border-bottom: none;
+}
+
+mat-list-item:hover {
+  background-color: #f0f8ff; /* Light blue on hover for history items */
 }
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
-  .container {
-    margin: 20px auto;
-    padding: 0 8px;
+  mat-card {
+    padding: 15px;
+  }
+
+  .button-grid button {
+    font-size: 1.2em;
+    padding: 15px 0;
+  }
+
+  .mat-input-element {
+    font-size: 1.5em;
+  }
+
+  .result {
+    font-size: 1.8em;
   }
 }

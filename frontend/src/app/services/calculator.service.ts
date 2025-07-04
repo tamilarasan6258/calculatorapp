@@ -10,9 +10,14 @@ export class CalculatorService {
 
   constructor(private http: HttpClient) {}
 
-  calculate(data: { number1: number, number2: number, operation: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/calculate`, data);
-  }
+  // calculate(data: { number1: number, number2: number, operation: string }): Observable<any> {
+  //   return this.http.post(`${this.apiUrl}/calculate`, data);
+  // }
+
+  calculate(data: { expression: string }): Observable<any> {
+  return this.http.post(`${this.apiUrl}/calculate`, data);
+}
+
 
   getHistory(): Observable<any> {
     return this.http.get(`${this.apiUrl}/history`);

@@ -2,26 +2,45 @@ const Calculation = require("../models/Calculation");
 const javaCalculatorService = require("../services/javaCalculatorService");
 
 // POST /api/calculate
+// exports.calculate = async (req, res) => {
+//     const { number1, number2, operation } = req.body;
+
+//     try {
+//         const result = await javaCalculatorService.calculate(number1, number2, operation);
+
+//         const record = new Calculation({
+//             number1,
+//             number2,
+//             operation,
+//             result
+//         });
+//         await record.save();
+
+//         res.json({ result });
+//     } catch (err) {
+//         console.error("❌ Calculation error:", err);
+//         res.status(500).json({ error: err.message || "Calculation error" });
+//     }
+// };
 exports.calculate = async (req, res) => {
-    const { number1, number2, operation } = req.body;
+  const { expression } = req.body;
 
-    try {
-        const result = await javaCalculatorService.calculate(number1, number2, operation);
+  try {
+    const result = await javaCalculatorService.calculate(expression);
 
-        const record = new Calculation({
-            number1,
-            number2,
-            operation,
-            result
-        });
-        await record.save();
+    const record = new Calculation({
+      expression, // save the whole string
+      result
+    });
+    await record.save();
 
-        res.json({ result });
-    } catch (err) {
-        console.error("❌ Calculation error:", err);
-        res.status(500).json({ error: err.message || "Calculation error" });
-    }
+    res.json({ result });
+  } catch (err) {
+    console.error("❌ Calculation error:", err);
+    res.status(500).json({ error: err.message || "Calculation error" });
+  }
 };
+
 
 // GET /api/history
 exports.getHistory = async (req, res) => {
